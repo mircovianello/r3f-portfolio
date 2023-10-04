@@ -1,0 +1,48 @@
+{
+  "name": "r3f-portfolio",
+  "description": "Having HTML and WebGL in the same scene with the addition of occlusion.",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "keywords": [
+    "occlusion",
+    "drei",
+    "html"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "dependencies": {
+    "@headlessui/react": "^1.7.17",
+    "@heroicons/react": "1.0.6",
+    "@react-spring/core": "^9.7.3",
+    "@react-spring/three": "^9.7.3",
+    "@react-spring/web": "^9.7.3",
+    "@react-three/drei": "9.75.0",
+    "@react-three/fiber": "8.13.3",
+    "@types/three": "0.152.1",
+    "camera-controls": "^2.7.2",
+    "maath": "^0.9.0",
+    "pnpm": "^8.8.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-spring": "^9.7.3",
+    "three": "0.153.0",
+    "uuid-by-string": "^4.0.0",
+    "wouter": "^2.11.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.24",
+    "@types/react-dom": "^18.2.9",
+    "@vitejs/plugin-react": "^3.1.0",
+    "vite": "^4.4.10"
+  }
+}
