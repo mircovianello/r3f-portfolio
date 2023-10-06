@@ -27,10 +27,10 @@ function Controls({
   const gl = useThree((state) => state.gl);
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), []);
   return useFrame((state, delta) => {
-    zoom ? pos.set(focus.x, focus.y, focus.z + 3.6) : pos.set(0, 0, 6);
-    zoom ? look.set(focus.x, focus.y, focus.z - 0.2) : look.set(0, 0, 4);
+    zoom ? pos.set(focus.x, focus.y - 0.7, focus.z + 0.7) : pos.set(0, 0, 6);
+    zoom ? look.set(focus.x, focus.y - 0.7, focus.z - 0.7) : look.set(0, 0, 4);
 
-    state.camera.position.lerp(pos, 0.5);
+    state.camera.position.lerp(pos, 0.7);
     state.camera.updateProjectionMatrix();
 
     controls.setLookAt(
@@ -195,17 +195,6 @@ export default function App() {
 
   return (
     <web.main style={{ background: "f0f0f0" }}>
-      <web.h1
-        style={{
-          opacity: 1,
-          transform: "translate3d(-50%,${o * 50 - 100}px,0)",
-        }}
-        className="title"
-      >
-        Mirco Vianello
-        <br />
-        Software Engineer
-      </web.h1>
       <Canvas
         shadows
         dpr={[1, 2]}
