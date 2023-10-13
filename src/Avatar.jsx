@@ -1,0 +1,137 @@
+import React, { useEffect, useRef } from "react";
+import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+
+export function Avatar(props) {
+  const { animation } = props;
+
+  const group = useRef();
+  const { nodes, materials } = useGLTF("models/Avatar.glb");
+
+  const { animations: idleAnimation } = useFBX("animations/Idle.fbx");
+  const { animations: wavingAnimation } = useFBX("animations/Waving.fbx");
+  const { animations: surprisedAnimation } = useFBX("animations/Surprised.fbx");
+  const { animations: sittingDownAnimation } = useFBX(
+    "animations/Sitting Down.fbx"
+  );
+  const { animations: standingUpAnimation } = useFBX(
+    "animations/Standing Up.fbx"
+  );
+  const { animations: armGestureAnimation } = useFBX(
+    "animations/Arm Gesture.fbx"
+  );
+  const { animations: clappingAnimation } = useFBX("animations/Clapping.fbx");
+
+  idleAnimation[0].name = "Idle";
+  wavingAnimation[0].name = "Waving";
+  surprisedAnimation[0].name = "Surprised";
+  sittingDownAnimation[0].name = "Sitting Down";
+  sittingDownAnimation[0].duration = 0;
+  standingUpAnimation[0].name = "Standing Up";
+  armGestureAnimation[0].name = "Arm Gesture";
+  clappingAnimation[0].name = "Clapping";
+
+  const { actions } = useAnimations(
+    [
+      idleAnimation[0],
+      wavingAnimation[0],
+      surprisedAnimation[0],
+      sittingDownAnimation[0],
+      standingUpAnimation[0],
+      armGestureAnimation[0],
+      clappingAnimation[0],
+    ],
+    group
+  );
+
+  useEffect(() => {
+    actions[animation].reset().fadeIn(0.5).play();
+    return () => {
+      actions[animation].fadeOut(0.5);
+    };
+  }, [animation]);
+
+  return (
+    <group {...props} ref={group} scale={[0.5, 0.5, 0.5]} dispose={null}>
+      <group>
+        <primitive object={nodes.Hips} />
+        <skinnedMesh
+          frustumCulled={false}
+          geometry={nodes.Wolf3D_Body.geometry}
+          material={materials.Wolf3D_Body}
+          skeleton={nodes.Wolf3D_Body.skeleton}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          geometry={nodes.Wolf3D_Outfit_Bottom.geometry}
+          material={materials.Wolf3D_Outfit_Bottom}
+          skeleton={nodes.Wolf3D_Outfit_Bottom.skeleton}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          geometry={nodes.Wolf3D_Outfit_Footwear.geometry}
+          material={materials.Wolf3D_Outfit_Footwear}
+          skeleton={nodes.Wolf3D_Outfit_Footwear.skeleton}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          geometry={nodes.Wolf3D_Outfit_Top.geometry}
+          material={materials.Wolf3D_Outfit_Top}
+          skeleton={nodes.Wolf3D_Outfit_Top.skeleton}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          geometry={nodes.Wolf3D_Glasses.geometry}
+          material={materials.Wolf3D_Glasses}
+          skeleton={nodes.Wolf3D_Glasses.skeleton}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          name="EyeLeft"
+          geometry={nodes.EyeLeft.geometry}
+          material={materials.Wolf3D_Eye}
+          skeleton={nodes.EyeLeft.skeleton}
+          morphTargetDictionary={nodes.EyeLeft.morphTargetDictionary}
+          morphTargetInfluences={nodes.EyeLeft.morphTargetInfluences}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          name="EyeRight"
+          geometry={nodes.EyeRight.geometry}
+          material={materials.Wolf3D_Eye}
+          skeleton={nodes.EyeRight.skeleton}
+          morphTargetDictionary={nodes.EyeRight.morphTargetDictionary}
+          morphTargetInfluences={nodes.EyeRight.morphTargetInfluences}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          name="Wolf3D_Head"
+          geometry={nodes.Wolf3D_Head.geometry}
+          material={materials.Wolf3D_Skin}
+          skeleton={nodes.Wolf3D_Head.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Head.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Head.morphTargetInfluences}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          name="Wolf3D_Teeth"
+          geometry={nodes.Wolf3D_Teeth.geometry}
+          material={materials.Wolf3D_Teeth}
+          skeleton={nodes.Wolf3D_Teeth.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Teeth.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Teeth.morphTargetInfluences}
+        />
+        <skinnedMesh
+          frustumCulled={false}
+          name="Wolf3D_Beard"
+          geometry={nodes.Wolf3D_Beard.geometry}
+          material={materials.Wolf3D_Beard}
+          skeleton={nodes.Wolf3D_Beard.skeleton}
+          morphTargetDictionary={nodes.Wolf3D_Beard.morphTargetDictionary}
+          morphTargetInfluences={nodes.Wolf3D_Beard.morphTargetInfluences}
+        />
+      </group>
+    </group>
+  );
+}
+
+useGLTF.preload("models/Avatar.glb");

@@ -1,4 +1,5 @@
 @import url('https://rsms.me/inter/inter.css');
+@import url('https://fonts.googleapis.com/css?family=Press Start 2P');
 
 * {
   box-sizing: border-box;
@@ -15,21 +16,54 @@ main,
 }
 
 body {
-  background-image: radial-gradient(farthest-side at 60% 60%, #163244, #0a0a0a);
+  font-family: inter;
+  color: black;
+  background: #f0f0f0;
 }
 
 .title {
-  color: white;
   margin: 0;
   padding: 0;
   position: absolute;
-  top: 10%;
-  left: 10%;
+  top: 35%;
+  left: 50%;
   transform: translate3d(-50%, -50%, 0);
   font-weight: 400;
-  font-size: 2em;
+  font-size: 1em;
   letter-spacing: -0.045em;
   white-space: nowrap;
+  font-family: 'Press Start 2P';
+  text-align: center;
+}
+
+.clock-date {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-weight: 400;
+  font-size: 0.7em;
+  letter-spacing: -0.3em;
+  white-space: nowrap;
+  font-family: 'Press Start 2P';
+  text-align: center;
+}
+
+.clock-time {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 43%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  font-weight: 400;
+  font-size: 2.1em;
+  letter-spacing: -0.045em;
+  white-space: nowrap;
+  font-family: 'Press Start 2P';
+  text-align: center;
 }
 
 .content {
