@@ -1,8 +1,12 @@
-import React, { useEffect, useRef } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
+import { useStore } from "./store";
+import { SceneContext } from "./Scene";
 
 export function Avatar(props) {
-  const { animation } = props;
+  const { open, focused } = useContext(SceneContext);
+
+  const { play, actionName, prevActionName } = useStore((state) => state);
 
   const group = useRef();
   const { nodes, materials } = useGLTF("models/Avatar.glb");
@@ -44,11 +48,32 @@ export function Avatar(props) {
   );
 
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
-    return () => {
-      actions[animation].fadeOut(0.5);
-    };
-  }, [animation]);
+    if (prevActionName !== undefined) {
+      actions[prevActionName].fadeOut(0.5);
+    }
+    actions[actionName]
+      .reset()
+      .setEffectiveTimeScale(1)
+      .setEffectiveWeight(1)
+      .fadeIn(0.5)
+      .play();
+  }, [actions, actionName, prevActionName]);
+
+  useEffect(() => {
+    if (open && !focused) {
+      prevActionName === "Sitting Down" ? play(2) : play(0);
+      setTimeout(() => {
+        play(0);
+      }, 3000);
+    } else if (open && focused) {
+      prevActionName === "Idle" ? play(4) : play(0);
+      setTimeout(() => {
+        play(0);
+      }, 3000);
+    } else if (!open) {
+      prevActionName === undefined ? play(1) : play(3);
+    }
+  }, [open, focused]);
 
   return (
     <group {...props} ref={group} scale={[0.5, 0.5, 0.5]} dispose={null}>
