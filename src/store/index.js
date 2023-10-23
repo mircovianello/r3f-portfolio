@@ -8,13 +8,24 @@ export const useStore = create((set, get) => ({
   prevActionName: undefined,
   playNext: () => {
     const prevActionName = get().actionName;
-    const actionNameIndex = (get().actionNameIndex + 1) % get().actionNamesLength;
+    const actionNameIndex = Math.floor(Math.random() * (6 - 5 + 1) + 5);
     const actionName = get().actionNames[actionNameIndex];
     set({ actionName, actionNameIndex, prevActionName });
+    setTimeout(() => { get().idle(); }, 3000);
   },
   play: (actionNameIndex) => {
     const prevActionName = get().actionName;
     const actionName = get().actionNames[actionNameIndex];
     set({ actionName, actionNameIndex, prevActionName });
+  },
+  idle: () => {
+    const prevActionName = get().actionName;
+    const actionNameIndex = 0;
+    const actionName = "Idle";
+    set({ actionName, actionNameIndex, prevActionName });
+    const interval = setInterval(() => {
+      get().playNext();
+    }, 60000);
+    return () => clearInterval(interval);
   }
 }))

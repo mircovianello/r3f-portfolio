@@ -6,7 +6,7 @@ import { SceneContext } from "./Scene";
 export function Avatar(props) {
   const { open, focused } = useContext(SceneContext);
 
-  const { play, actionName, prevActionName } = useStore((state) => state);
+  const { idle, play, actionName, prevActionName } = useStore((state) => state);
 
   const group = useRef();
   const { nodes, materials } = useGLTF("models/Avatar.glb");
@@ -57,18 +57,18 @@ export function Avatar(props) {
       .setEffectiveWeight(1)
       .fadeIn(0.5)
       .play();
-  }, [actions, actionName, prevActionName]);
+  }, [actionName]);
 
   useEffect(() => {
     if (open && !focused) {
-      prevActionName === "Sitting Down" ? play(2) : play(0);
+      prevActionName === "Sitting Down" ? play(2) : idle();
       setTimeout(() => {
-        play(0);
+        idle();
       }, 3000);
     } else if (open && focused) {
-      prevActionName === "Idle" ? play(4) : play(0);
+      prevActionName !== "Arm Gesture" ? play(4) : idle();
       setTimeout(() => {
-        play(0);
+        idle();
       }, 3000);
     } else if (!open) {
       prevActionName === undefined ? play(1) : play(3);
