@@ -1,5 +1,7 @@
 import {create} from 'zustand';
 
+let timeout = null;
+
 export const useStore = create((set, get) => ({
   actionNames: ['Idle', 'Sitting Down', 'Standing Up', 'Waving', 'Arm Gesture', 'Clapping', 'Surprised'],
   actionName: 'Sitting Down',
@@ -8,24 +10,25 @@ export const useStore = create((set, get) => ({
   prevActionName: undefined,
   playNext: () => {
     const prevActionName = get().actionName;
-    const actionNameIndex = Math.floor(Math.random() * (6 - 5 + 1) + 5);
+    const actionNameIndex = (prevActionName == "Idle") ? Math.floor(Math.random() * (6 - 5 + 1) + 5) : 0;
     const actionName = get().actionNames[actionNameIndex];
     set({ actionName, actionNameIndex, prevActionName });
-    setTimeout(() => { get().idle(); }, 3000);
+    timeout = setTimeout(() => { get().idle(); }, 4000);
   },
+
   play: (actionNameIndex) => {
     const prevActionName = get().actionName;
     const actionName = get().actionNames[actionNameIndex];
     set({ actionName, actionNameIndex, prevActionName });
+    return () => clearTimeout(timeout);
   },
   idle: () => {
     const prevActionName = get().actionName;
     const actionNameIndex = 0;
     const actionName = "Idle";
     set({ actionName, actionNameIndex, prevActionName });
-    const interval = setInterval(() => {
+    timeout = setTimeout(() => {
       get().playNext();
-    }, 60000);
-    return () => clearInterval(interval);
+    }, 50000);
   }
 }))

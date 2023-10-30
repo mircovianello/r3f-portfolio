@@ -22,6 +22,7 @@ export function Clock() {
   let time = new Date().toLocaleTimeString([], {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
   });
 
   const [ctime, setTime] = useState(time);
@@ -29,6 +30,7 @@ export function Clock() {
     time = new Date().toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
+      second: "2-digit",
     });
     setTime(time);
   };
@@ -37,10 +39,10 @@ export function Clock() {
   return (
     <>
       <web.h1 className={"clock-date"} style={{ opacity: 1 }}>
-        {cdate}
+        <span style={{ fontSize: "0.33em" }}>{cdate}</span>
       </web.h1>
       <web.h1 className={"clock-time"} style={{ opacity: 1 }}>
-        {ctime}
+        <span style={{ fontSize: "0.7em" }}>{ctime}</span>
       </web.h1>
     </>
   );

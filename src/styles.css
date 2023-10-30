@@ -1,5 +1,4 @@
 @import url('https://rsms.me/inter/inter.css');
-@import url('https://fonts.googleapis.com/css?family=Press Start 2P');
 
 * {
   box-sizing: border-box;
@@ -22,63 +21,68 @@ body {
 }
 
 .title {
-  margin: 0;
-  padding: 0;
   position: absolute;
   top: 35%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  font-weight: 400;
-  font-size: 1em;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-  font-family: 'Press Start 2P';
-  text-align: center;
+  left: 55%;
+  font-weight: 900;
+  font-size: 3em;
+  margin: 0;
+  color: peru;
+  line-height: 0.8em;
+  letter-spacing: -2px;
+  text-align: left;
+}
+
+.title > span {
+  white-space: pre;
+}
+
+.subtitle {
+  position: absolute;
+  top: 45%;
+  left: 55%;
+  font-weight: 900;
+  font-size: 3em;
+  margin: 0;
+  color: peru;
+  line-height: 0.8em;
+  letter-spacing: -2px;
+  text-align: left;
+}
+
+.subtitle > span {
+  white-space: pre;
 }
 
 .clock-date {
-  margin: 0;
-  padding: 0;
   position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  font-weight: 400;
-  font-size: 0.7em;
-  letter-spacing: -0.3em;
-  white-space: nowrap;
-  font-family: 'Press Start 2P';
-  text-align: center;
+  top: 52%;
+  left: 55%;
+  font-weight: 900;
+  font-size: 3em;
+  margin: 0;
+  color: peru;
+  line-height: 0.8em;
+  letter-spacing: -2px;
+  text-align: left;
 }
 
 .clock-time {
-  margin: 0;
-  padding: 0;
   position: absolute;
-  top: 43%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  font-weight: 400;
-  font-size: 2.1em;
-  letter-spacing: -0.045em;
-  white-space: nowrap;
-  font-family: 'Press Start 2P';
-  text-align: center;
+  top: 58%;
+  left: 55%;
+  font-weight: 900;
+  font-size: 3em;
+  margin: 0;
+  color: peru;
+  line-height: 0.8em;
+  letter-spacing: -2px;
+  text-align: left;
 }
 
-.content {
-  width: 334px;
-  height: 216px;
-  background: #f0f0f0;
-  border-radius: 3px;
-  overflow-y: auto;
-  padding: 0;
-}
-
-.wrapper {
-  padding: 10px;
-  width: 668px;
-  height: 432px;
-  transform: scale(0.5);
-  transform-origin: top left;
+.iframe {
+  width: 1840px;
+  height: 1192px;
+  border: none;
+  border-radius: 0px;
 }

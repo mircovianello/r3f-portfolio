@@ -1,12 +1,11 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import LockScreen from "/public/LockScreen.png";
+import LockScreen from "/public/vscode.mp4";
 import { useSpring } from "@react-spring/core";
-import HeroPage from "./HeroPage";
-import { Html, useGLTF } from "@react-three/drei";
-import { useLoader } from "@react-three/fiber";
+import { Html, useGLTF, useVideoTexture } from "@react-three/drei";
 import { a as three } from "@react-spring/three";
 import { SceneContext } from "./Scene";
+import { Website } from "./Website";
 
 export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
   const group = useRef();
@@ -15,11 +14,11 @@ export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
   const { nodes, materials } = useGLTF("models/Laptop.glb");
 
   const spring = useSpring({ open: Number(open) });
-  const handleOpen = (open) => {
+  const handleOpen = () => {
     setOpen((value) => !value);
   };
 
-  const handleFocus = (focused) => {
+  const handleFocus = () => {
     setFocus((value) => !value);
   };
 
@@ -29,13 +28,13 @@ export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
     [hovered]
   );
 
-  const texture = useLoader(THREE.TextureLoader, LockScreen);
+  const textureVSCode = useVideoTexture(LockScreen);
 
   return (
     <group
       scale={[0.2, 0.2, 0.2]}
       ref={group}
-      onClick={(e) => (e.stopPropagation(), handleOpen(!open))}
+      onClick={(e) => (e.stopPropagation(), handleOpen())}
       onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
       onPointerOut={(e) => setHovered(false)}
       dispose={null}
@@ -60,10 +59,10 @@ export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
               onClick={(e) => (
                 e.stopPropagation(),
                 zoomToView(e.object.position),
-                handleFocus(!focused)
+                handleFocus()
               )}
             >
-              <meshBasicMaterial attach="material" map={texture} />
+              <meshBasicMaterial attach="material" map={textureVSCode} />
             </mesh>
           )}
           {focused && (
@@ -71,23 +70,18 @@ export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
               material={materials["screen.001"]}
               geometry={nodes["Cube008_2"].geometry}
               onPointerMissed={(e) => (
-                e.stopPropagation(),
-                zoomToView(e.position),
-                handleFocus(!focused)
+                e.stopPropagation(), zoomToView(e.position), handleFocus()
               )}
             >
               <Html
-                className="content"
                 rotation-x={-Math.PI / 2}
                 position={[0, 0.05, -0.09]}
                 transform
+                distanceFactor={1.8}
                 occlude
               >
-                <div
-                  className="wrapper"
-                  onPointerDown={(e) => e.stopPropagation()}
-                >
-                  <HeroPage />
+                <div onPointerDown={(e) => e.stopPropagation()}>
+                  <Website />
                 </div>
               </Html>
             </mesh>

@@ -15,8 +15,12 @@ export function Controls({
   const gl = useThree((state) => state.gl);
   const controls = useMemo(() => new CameraControls(camera, gl.domElement), []);
   return useFrame((state, delta) => {
-    zoom ? pos.set(focus.x, focus.y - 0.8, focus.z + 1.8) : pos.set(0, 0, 6);
-    zoom ? look.set(focus.x, focus.y - 0.8, focus.z - 1.8) : look.set(0, 0, 3);
+    zoom
+      ? pos.set(focus.x + 0.3, focus.y - 0.9, focus.z + 0.7)
+      : pos.set(0, 0, 6);
+    zoom
+      ? look.set(focus.x + 0.3, focus.y - 0.9, focus.z - 0.7)
+      : look.set(1, 0, 3);
 
     state.camera.position.lerp(pos, 0.5);
     state.camera.updateProjectionMatrix();
