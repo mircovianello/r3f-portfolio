@@ -2,7 +2,7 @@ import React, { createContext, useRef, useState } from "react";
 
 export const SceneContext = createContext();
 
-export function Scene({ zoomToView, ...props }) {
+export function Scene({ ...props }) {
   const ref = useRef();
 
   const [open, setOpen] = useState(false);

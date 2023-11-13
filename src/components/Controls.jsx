@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import * as THREE from "three";
 import CameraControls from "camera-controls";
 import { useFrame, useThree } from "@react-three/fiber";

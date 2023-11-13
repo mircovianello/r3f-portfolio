@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { useAnimations, useFBX, useGLTF } from "@react-three/drei";
-import { useStore } from "./store";
+import { useStore } from "../store";
 import { SceneContext } from "./Scene";
+import * as THREE from "three";
 
 export function Avatar(props) {
   const { open, focused } = useContext(SceneContext);
 
-  const { idle, play, actionName, prevActionName } = useStore((state) => state);
+  const { idle, play, playNext, actionName, prevActionName } = useStore(
+    (state) => state
+  );
 
   const group = useRef();
   const { nodes, materials } = useGLTF("models/Avatar.glb");
@@ -34,7 +37,7 @@ export function Avatar(props) {
   armGestureAnimation[0].name = "Arm Gesture";
   clappingAnimation[0].name = "Clapping";
 
-  const { actions } = useAnimations(
+  const { mixer, actions } = useAnimations(
     [
       idleAnimation[0],
       wavingAnimation[0],
@@ -57,19 +60,38 @@ export function Avatar(props) {
       .setEffectiveWeight(1)
       .fadeIn(0.5)
       .play();
+
+    if (
+      actionName == "Surprised" ||
+      actionName == "Arm Gesture" ||
+      actionName == "Clapping" ||
+      actionName == "Standing Up"
+    ) {
+      actions[actionName].setLoop(THREE.LoopOnce);
+      actions[actionName].clampWhenFinished = true;
+    }
+
+    mixer.removeEventListener("finished", idle);
+
+    if (
+      actionName != "Idle" &&
+      actionName != "Sitting Down" &&
+      actionName != "Waving"
+    ) {
+      actions[actionName].getMixer().addEventListener("finished", idle);
+    }
   }, [actionName]);
+
+  useEffect(() => {
+    const interval = setInterval(() => playNext(), 60000);
+    return () => clearInterval(interval);
+  }, [playNext]);
 
   useEffect(() => {
     if (open && !focused) {
       prevActionName === "Sitting Down" ? play(2) : idle();
-      setTimeout(() => {
-        idle();
-      }, 3000);
     } else if (open && focused) {
       prevActionName !== "Arm Gesture" ? play(4) : idle();
-      setTimeout(() => {
-        idle();
-      }, 3000);
     } else if (!open) {
       prevActionName === undefined ? play(1) : play(3);
     }

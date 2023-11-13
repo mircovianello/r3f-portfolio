@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import LockScreen from "/public/vscode.mp4";
 import { useSpring } from "@react-spring/core";
 import { Html, useGLTF, useVideoTexture } from "@react-three/drei";
 import { a as three } from "@react-spring/three";
@@ -28,7 +27,7 @@ export function Laptop({ zoomToView, c = new THREE.Color(), ...props }) {
     [hovered]
   );
 
-  const textureVSCode = useVideoTexture(LockScreen);
+  const textureVSCode = useVideoTexture("textures/vscode.mp4");
 
   return (
     <group

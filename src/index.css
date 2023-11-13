@@ -21,11 +21,8 @@ body {
 }
 
 .title {
-  position: absolute;
-  top: 35%;
-  left: 55%;
   font-weight: 900;
-  font-size: 3em;
+  font-size: 0.8em;
   margin: 0;
   color: peru;
   line-height: 0.8em;
@@ -38,11 +35,8 @@ body {
 }
 
 .subtitle {
-  position: absolute;
-  top: 45%;
-  left: 55%;
   font-weight: 900;
-  font-size: 3em;
+  font-size: 0.3em;
   margin: 0;
   color: peru;
   line-height: 0.8em;
@@ -55,11 +49,8 @@ body {
 }
 
 .clock-date {
-  position: absolute;
-  top: 52%;
-  left: 55%;
   font-weight: 900;
-  font-size: 3em;
+  font-size: 0.3em;
   margin: 0;
   color: peru;
   line-height: 0.8em;
@@ -68,11 +59,8 @@ body {
 }
 
 .clock-time {
-  position: absolute;
-  top: 58%;
-  left: 55%;
   font-weight: 900;
-  font-size: 3em;
+  font-size: 0.7em;
   margin: 0;
   color: peru;
   line-height: 0.8em;
@@ -85,4 +73,32 @@ body {
   height: 1192px;
   border: none;
   border-radius: 0px;
+}
+
+.trailsText {
+  position: relative;
+  top: 230px;
+  left: 55%;
+  width: 100%;
+  height: 160px;
+  line-height: 80px;
+  color: black;
+  font-size: 6em;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  will-change: transform, opacity;
+  overflow: hidden;
+}
+
+.trailsText > div {
+  padding-right: 0.05em;
+  overflow: hidden;
+}
+
+.container {
+  position: absolute;
+  align-items: center;
+  height: 100%;
+  width: 100%; 
+  justify-content: center;
 }

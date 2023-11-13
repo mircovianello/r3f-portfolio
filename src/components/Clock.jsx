@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { a as web } from "@react-spring/web";
 
 export function Clock() {
   let date = new Date().toLocaleDateString("en-GB", {
@@ -38,12 +37,8 @@ export function Clock() {
 
   return (
     <>
-      <web.h1 className={"clock-date"} style={{ opacity: 1 }}>
-        <span style={{ fontSize: "0.33em" }}>{cdate}</span>
-      </web.h1>
-      <web.h1 className={"clock-time"} style={{ opacity: 1 }}>
-        <span style={{ fontSize: "0.7em" }}>{ctime}</span>
-      </web.h1>
+      <h1 className={"clock-date"}>{cdate}</h1>
+      <h1 className={"clock-time"}>{ctime}</h1>
     </>
   );
 }
