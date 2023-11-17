@@ -61,7 +61,7 @@ body {
 .clock-time {
   font-weight: 900;
   font-size: 0.7em;
-  margin: 0;
+  margin: 2px 0 0 0;
   color: peru;
   line-height: 0.8em;
   letter-spacing: -2px;
@@ -79,7 +79,7 @@ body {
   position: relative;
   top: 230px;
   left: 55%;
-  width: 100%;
+  width: 500px;
   height: 160px;
   line-height: 80px;
   color: black;

@@ -4,6 +4,8 @@ import { Environment, ContactShadows } from "@react-three/drei";
 import { a as three } from "@react-spring/three";
 import { a as web } from "@react-spring/web";
 import { Controls } from "./components/Controls";
+import { Desk } from "./components/Desk";
+import { Newton } from "./components/Newton";
 import { Laptop } from "./components/Laptop";
 import { Avatar } from "./components/Avatar";
 import { motion } from "framer-motion-3d";
@@ -19,14 +21,14 @@ export default function App() {
 
   return (
     <ChakraProvider>
-      <web.main style={{ background: "#c7e6fd" }}>
+      <web.main>
         <div className={"container"}>
           <Trail open={!zoom}>
             <Title />
             <Clock />
           </Trail>
         </div>
-        <Canvas dpr={[1, 2]} camera={{ position: [0, 2, 6], fov: 50 }}>
+        <Canvas dpr={[1, 2]} camera={{ position: [-1, 0, 0], fov: 50 }}>
           <three.pointLight
             position={[-1, -1, 2]}
             intensity={1.5}
@@ -35,6 +37,8 @@ export default function App() {
           <Suspense fallback={null}>
             <group>
               <Scene>
+                <Desk position={[0, -3.26, -1]} />
+                <Newton position={[-1.7, -1.6, -0.4]} />
                 <Laptop
                   position={[0, -1.5, -0.7]}
                   castShadow
